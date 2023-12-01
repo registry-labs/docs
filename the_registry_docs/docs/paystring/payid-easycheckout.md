@@ -234,7 +234,6 @@ The following is an example of a PayID Easy Checkout Link:
         "rel": "https://payid.org/ns/payid-easy-checkout-uri/1.0",
         "href": "https://wallet.com/checkout"
     }
-
 ```
 
 # Security Considerations
