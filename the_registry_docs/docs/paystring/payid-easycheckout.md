@@ -155,7 +155,7 @@ containing a JRD with an Easy Checkout link relation.
 
 For example, a PayID Discovery Server might respond to a PayID Discovery query with the following payload:
 
-     {
+    ``` {
         "subject": "payid:alice$wallet.com",
         "links": [
             {
@@ -164,6 +164,7 @@ For example, a PayID Discovery Server might respond to a PayID Discovery query w
             }
         ]
      }
+     ```
      
 A PayID Easy Checkout client MUST parse this response to find the PayID Easy Checkout Link. 
 If the JRD returned from the PayID Discovery query does not contain a 
@@ -221,15 +222,20 @@ This section defines the PayID Easy Checkout Link Relation, which conforms to se
 The Link MUST include the Link Relation Type defined in [PayID Easy Checkout URL](#iana-considerations) in the object's 'rel' field.
 The Link MUST also include a PayID Easy Checkout URL in the 'href' field of the link.
 
+```
     * 'rel': `https://payid.org/ns/payid-easy-checkout-uri/1.0`
     * 'href': {A PayID Easy Checkout URL}
+```
 
 The following is an example of a PayID Easy Checkout Link:
 
+```
     {
         "rel": "https://payid.org/ns/payid-easy-checkout-uri/1.0",
         "href": "https://wallet.com/checkout"
     }
+
+```
 
 # Security Considerations
 Various security considerations should be taken into account for PayID
@@ -319,7 +325,7 @@ The HTTP request in this example would look like this:
     Host: wallet.example.com
     
 If the sender's PayID Discovery Server has enabled PayID Easy Checkout in their wallet, the server would respond with something like this:
-     
+```     
      HTTP/1.1 200 OK
      Access-Control-Allow-Origin: *
      Content-Type: application/jrd+json
@@ -334,6 +340,7 @@ If the sender's PayID Discovery Server has enabled PayID Easy Checkout in their 
          }
        ]
      }
+```
 
 ### Assemble PayID Easy Checkout URL with Query Parameters
 The merchant UI would parse the PayID Discovery response and iterate over the 'links' collection to find the link with 

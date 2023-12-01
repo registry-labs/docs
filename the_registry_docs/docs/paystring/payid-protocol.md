@@ -133,6 +133,7 @@ This specification defines the PayID protocol - an application-layer protocol, w
 ## Response for application/* + json
   The response body for `application/* + json` is a JSON object with the following name/value pairs.
 
+```
       {
        optional string payId,
        required Address[] addresses,
@@ -140,6 +141,7 @@ This specification defines the PayID protocol - an application-layer protocol, w
        optional string identity,
        optional ProofOfControlSignature proofOfControlSignature
       }
+```
 
 ### payId
    The value of `payId` field is the PayID URI in the client request that identifies the payment account information that the JSON object describes.
@@ -148,13 +150,14 @@ This specification defines the PayID protocol - an application-layer protocol, w
 
 ### addresses
    The value of `addresses` field is a JSON array of type `Address` of one or more JSON objects with the following name/value pairs.
-
+```
       {
        required string paymentNetwork,
        optional string environment,
        required string addressDetailsType,
        required addressDetailsType addressDetails
       }
+```
 
    * paymentNetwork: The value of `paymentNetwork` as specified in the client request's `Accept` header
    * environment: The value of `environment` as specified in the client request's `Accept` header
@@ -169,24 +172,26 @@ This specification defines the PayID protocol - an application-layer protocol, w
    We define the following two types of payment address types.
 
   * CryptoAddressDetails: This is a JSON object with the following name/value pairs.
-
+```
     {
       required string address,
       optional string tag
     }
-
+```
       * address: The value of `address` field contains the on-ledger address corresponding to this owner.
       * tag: The value of `tag` field is the tag value used by some cryptocurrencies to distinguish accounts contained within a singular address. E.g XRP Ledger's destination tag.
 
   * FiatAddressDetails: This is a JSON object with the following name/value pairs.
-
+  * 
+```
     {
       required string accountNumber,
       optional string routingNumber
     }
-
+```
       * accountNumber: The value of `accountNumber` contains the fiat bank account number.
       * routingNumber: The value of `routingNumber` is the routing number used by some fiat payment networks.
+
 
 ### memo
    The `memo` string may specify additional metadata corresponding to a payment.
@@ -194,6 +199,7 @@ This specification defines the PayID protocol - an application-layer protocol, w
    The `memo` string is an OPTIONAL field in the response.
 
 ### identity
+
    The `identity` string may specify any additional identity information about the PayID owner or PayID server.
 
    The `identity` string is an OPTIONAL field in the response.
@@ -201,13 +207,14 @@ This specification defines the PayID protocol - an application-layer protocol, w
 ### proofOfControlSignature
   The value of `proofOfControlSignature` field is a JSON object of type `ProofOfControlSignature` with the following name/value pairs.
 
+```
       {
        required string publicKey,
        required string payID,
        required string hashAlgorithm,
        required string signature
       }
-
+```
    * publicKey: On-ledger public key of the Receiving Endpoint
    * payID: PayID URI of the PayID owner
    * hashAlgorithm: Hash algorithms used to hash the entire contents of the `ProofOfControlSignature` message.
@@ -299,7 +306,7 @@ This specification defines the PayID protocol - an application-layer protocol, w
   The Basic PayID protocol is used to request a payment account(s) information resource identified by a PayID URI from a PayID-enabled service provider identified by a PayID URL using HTTP over secure transport. When successful, the PayID protocol always returns the JSON representation of a payment account(s) information resource along with optional metadata. This information can be used for any purposes outside the scope of this document, though it is expected the most common application would be making payment.
 
   The Basic PayID protocol comprises request and response messages, each of which is defined in more detail below. The following is a visual representation of the basic protocol flow:
-
+```
 
     PayID client                                         PayID server
        |                                                          |
@@ -313,7 +320,7 @@ This specification defines the PayID protocol - an application-layer protocol, w
        |                                                          |
        |                                                          |
 
-
+```
 ## Step 1: HTTP Request to PayID URL using HTTP GET Method
   A basic PayID client issues a query using the HTTP GET method to the PayID URL without any query parameters and body.
 
@@ -339,13 +346,13 @@ This specification defines the PayID protocol - an application-layer protocol, w
    The Wallet application would first discover the PayID URL for the PayID service-provider using one of the mechanisms described in PayID discovery [PAYID-DISCOVERY][] protocol.
 
    The Wallet application would then issue an HTTPS GET request:
-
+```
      GET https://receiver.example.com/bob HTTP/1.1
      Accept: application/payid+json
      PayID-Version: 1.0
-
+```
    The PayID server might respond like this:
-
+```
      HTTP/1.1 200 OK
      Content-Type: application/payid+json
      Content-Length: 403
@@ -374,19 +381,19 @@ This specification defines the PayID protocol - an application-layer protocol, w
       ],
       "memo" : "Additional optional information"
      }
-
+```
   In the above example we see that the PayID server returned a list of payment accounts identified by PayID `bob$receiver.example.com`. This is because Alice's Wallet asked for all the payment accounts corresponding to the PayID in the `Accept` header.
   Alice's Wallet MAY then use the payment account information to make payments.
 
   Another example:
-
+```
      GET https://receiver.example.com/bob HTTP/1.1
      Accept: application/xrpl-testnet+json; q=0.4,
              application/ach+json; q=0.1
      PayID-Version= 1.0
-
+```
    The PayID server might respond like this:
-
+```
      HTTP/1.1 200 OK
      Content-Type: application/xrpl-testnet+json
      Content-Length: 403
@@ -406,7 +413,7 @@ This specification defines the PayID protocol - an application-layer protocol, w
           }
         ]
      }
-
+```
 
 # Common Response Status Codes (TODO)
   A PayID server MAY respond to a request using any valid HTTP response code appropriate for the request. The PayID server SHOULD be as specific as possible in its choice of an HTTP specific status code.

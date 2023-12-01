@@ -5,7 +5,8 @@ sidebar_position: 2
 
 ## Unveiling the First Decentralized PayString Provider
 
-### PayStri `ng Protocol: A Seamless Path to Transactions
+
+### PayString Protocol: A Seamless Path to Transactions
 
 The PayString Protocol embodies simplicity and ease, equating sending money with sending an email. Human-readable addresses take center stage, effortlessly transmitting value in your chosen currency. Through the PayString network, standardized addresses become the conduit between participants. Consider `alice$example.com`, which elegantly maps to its URL counterpart, `https://example.com/alice`.
 

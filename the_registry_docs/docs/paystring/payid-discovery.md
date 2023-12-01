@@ -1,4 +1,3 @@
-<!-- 
 coding: utf-8
 
 title: PayID Discovery
@@ -58,19 +57,19 @@ informative:
 --- middle -->
 
 # Introduction
-   PayID Discovery is used to transform a PayID URI [PAYID-URI][] into a
+   PayID Discovery is used to transform a PayID URI  into a
    URL (defined below as a PayID Discovery URL) that can then be used by
    higher-order protocols to discover metadata about a PayID-enabled service
    provider.
 
    This document specifies two modes of PayID discovery: one using
-   Webfinger [RFC7033][] to resolve a corresponding PayID Discovery URL
+   Webfinger  to resolve a corresponding PayID Discovery URL
    from a PayID using an interactive protocol. The second mode uses a manual
    mechanism to assemble a PayID Discovery URL from a PayID by-hand.
 
    In 'interactive' mode, a PayID can be presented to a Webfinger-enabled
    service endpoint that supports PayID Discovery. The resource returns a
-   Webfinger-compliant JavaScript Object Notation (JSON) [RFC4627][] object
+   Webfinger-compliant JavaScript Object Notation (JSON)  object
    that can be used to perform PayID Discovery as defined in section 4.1 of
    this document.
 
@@ -107,7 +106,6 @@ informative:
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in
-   [RFC2119][].
 
 # Example Usage
    This section shows sample uses of PayID Discovery in several
@@ -128,7 +126,7 @@ informative:
      Host: receiver.example.com
 
    The server might respond like this:
-
+```
      HTTP/1.1 200 OK
      Access-Control-Allow-Origin: *
      Content-Type: application/jrd+json
@@ -143,12 +141,12 @@ informative:
          }
        ]
      }
-
+```
    Alice's wallet then uses the URL template found in the `template` property
    to assemble the specified PayId URL,
    `https://receiver.example.com/users/bob`.
 
-   Per [RFC7033][], Webfinger requests can be filtered by using a "rel"
+   Per , Webfinger requests can be filtered by using a "rel"
    parameter in the Webfinger request. Because support for the "rel" parameter
    is not required nor guaranteed, the client must not assume the "links"
    array will contain only the link relations related to PayID Discovery.
@@ -190,8 +188,8 @@ informative:
   identified by a PayID URI.
 
   When successful, PayID Discovery always yields a PayID URL, which is a
-  URI as defined by [RFC3986][] using the 'https' scheme defined in section
-  2.7.2 [RFC7230][]. A PayID URL can be used for any purposes outside the
+  URI as defined byusing the 'https' scheme defined in section
+  2.7.2 . A PayID URL can be used for any purposes outside the
   scope of this document.
 
   PayID Discovery is performed using one of two modes: "interactive" or
@@ -291,12 +289,12 @@ informative:
 
    For example, a PayID Discovery endpoint that only supports a single account
    might use a URI template string with no variables, like this:
-
+```
     {
       "rel": "https://payid.org/ns/payid-uri-template/1.0",
       "template": "https://example.com/alice"
     }
-
+```
    The result of this step is the PayID URL. Once obtained, PayID Discovery
    is considered to have completed successfully.
 
@@ -391,13 +389,13 @@ The resulting URL is a PayID URL.
             interactive PayID Discovery.
 
   The following is an example of a JRD that indicates a PayID Discovery URL:
-
+```
     {
       "rel": "https://payid.org/ns/payid-discovery-url/1.0",
       "href": "https://delegate.example.com/.well-known/webfinger?resource=
                payid%3Aalice%24example.com"
     }
-
+```
 ## JRD for PayID URI Template
   This type of JRD can be used to represent a URL that is a PayID URL
   Template.
@@ -406,12 +404,12 @@ The resulting URL is a PayID URL.
   * 'template': A PayID URI Template
 
   The following is an example of a JRD that indicates a PayID URI Template:
-
+```
     {
       "rel": "https://payid.org/ns/payid-uri-template/1.0",
       "template": "https://example.com/{acctpart}"
     }
-
+```
 # Security Considerations
 Various security considerations should be taken into account for PayID
 Discovery.

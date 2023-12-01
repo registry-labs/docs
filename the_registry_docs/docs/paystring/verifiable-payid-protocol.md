@@ -141,10 +141,12 @@ This specification defines the Verifiable PayID protocol - an extension to [PAYI
 ## JSON Payloads
 
 ### PayID Client Request Query Body for PaymentInformation Resource
+```
       {
        optional string identity,
        optional string memo
       }
+```
 
 #### identity
   The type/value of the `identity` field is TBD. We anticipate this being a mechanism for the PayID client to transmit their or the sender's `identity` information to the PayID server. This information can then be used by the PayID server/PayID owner to
@@ -162,6 +164,7 @@ This specification defines the Verifiable PayID protocol - an extension to [PAYI
 
   `SignatureWrapper` is an encapsulating wrapper for any verifiable PayID protocol messages. It allows for the generation of cryptographically signed third-party verifiable proofs of the contents of the messages exchanged between the participating endpoints. We define `SignatureWrapper` as JSON object with the following name/value pairs:
 
+```
       {
        required string messageType,
        required Message message,
@@ -170,13 +173,16 @@ This specification defines the Verifiable PayID protocol - an extension to [PAYI
        required string publicKey,
        required string signature
       }
+```
 
 #### messageType
    The value of `messageType` is the message type of the signed `message`. `messageType` is essential for future extensibility of the protocol to include more message types. We define the following enum for message types:
+ ```
     enum messageType
       {
         PaymentInformation
       }
+```
 
 #### message
    The value of `message` includes the contents of the Verifiable PayID protocol message of the type `messageType` to be signed.
@@ -210,7 +216,7 @@ Notice that the custodial and non-custodial service providers operate under diff
 # Verifiable PayID Protocol for Custodial Wallets and Exchanges
 
   The Verifiable PayID protocol flow is similar to that of the Basic PayID protocol [PAYID-PROTOCOL][] with the following modifications.
-
+```
     Sender  PayID client                                             PayID server    Receiver
       |           |                                                          |            |
       |PayID, etc.|                                                          |            |
@@ -223,8 +229,7 @@ Notice that the custodial and non-custodial service providers operate under diff
       |           |                                                          |notification|
       |           |                                                          |----------->|
       |           |                                                          |            |
-
-
+```
 ## Step 1: Preparing the HTTP Request to PayID URL using HTTP POST Method
   A verifiable PayID client issues a query using the HTTP `POST` method to the PayID URL with path parameter `payment-setup-details` and optional body parameters as described above.
 
@@ -330,7 +335,7 @@ This signed payment account(s) information message is then securely transferred 
    The Wallet application would first discover the PayID URL for the PayID service-provider using one of the mechanisms described in PayID discovery protocol [PAYID-DISCOVERY][].
 
    The Wallet application would then issue an HTTPS POST request:
-
+```
      POST /users/bob/payment-setup-details HTTP/1.1
      Host: www.receiver.example.com
      Accept: application/xrpl-testnet+json
@@ -340,9 +345,10 @@ This signed payment account(s) information message is then securely transferred 
       "identity": "TBD",
       "memo": "Any additional required information"
      }
+```
 
    Bob's wallet who is a custodial PayID server wallet might respond like this:
-
+```
      HTTP/1.1 200 OK
      Content-Type: application/json
      Content-Length: 403
@@ -379,6 +385,7 @@ This signed payment account(s) information message is then securely transferred 
     "publicKey" : "00:c9:22:69:31:8a:d6:6c:ea:da:c3:7f:2c:ac:a5:af:c0:02:ea:81:cb:65:b9:fd:0c:6d:46:5b:c9:1e:9d:3b:ef...",
     "signature" : "8b:c3:ed:d1:9d:39:6f:af:40:72:bd:1e:18:5e:30:54:23:35..."
     }
+```
 
   In the above example we see that Bob's custodial PayID server wallet returned a signed X-Address on XRPL testnet identified by PayID `bob$receiver.example.com`. This is because Alice's wallet asked for XRPL and testnet payment accounts corresponding to the PayID in the `Accept` header.
 
@@ -388,7 +395,7 @@ This signed payment account(s) information message is then securely transferred 
   Consider the same scenario as above.
 
   Bob's wallet who is a non-custodial PayID server might respond like this:
-
+```
      HTTP/1.1 200 OK
      Content-Type: application/json
      Content-Length: 403
@@ -416,7 +423,7 @@ This signed payment account(s) information message is then securely transferred 
      }
     "signature" : "TBD"
     }
-
+```
  In the above example, the `PaymentInformation` resource is a pre-signed message with the off-ledger private keys of the PayID owner Bob. Bob's non-custodial wallet retrieves this response and sends it to the PayID client.
 
 //TODO Add example for PayID owner's public key embedded in PayID.
