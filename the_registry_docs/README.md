@@ -1,3 +1,7 @@
+# setup for juno
+https://javascript.plainenglish.io/data-loading-for-docusaurus-routes-d1f98240be55
+
+
 # Website
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
