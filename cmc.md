@@ -112,7 +112,7 @@ This is usually found on the explorer page of the asset. See example - https://g
 Block Explorer 1(optional)
 Insert a valid URL with the CONTRACT ADDRESS, e.g. https://etherscan.io/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599. This is a mandatory field for projects that are already trading on an exchange.
 
-*** dashboard.internetcomputer.org/trtadress
+*** https://dashboard.internetcomputer.org/canister/bf7ec-maaaa-aaaag-qcgda-cai
 
 Block Explorer(s) 2, 3, 4, 5 (e.g. Etherscan, Ethplorer)(optional)
 Insert a valid URL with the CONTRACT ADDRESS, e.g. https://etherscan.io/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599. If there is more than 1 explorer URL, please separate each entry with a comma. For example, https://etherscan.io/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599, https://ethplorer.io/address/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599, https://bscscan.com/token/0xe9e7cea3dedca5984780bafc599bd69add087d56, https://polygonscan.com/token/0xa1428174f516f527fafdd146b883bb4428682737
@@ -120,7 +120,7 @@ Insert a valid URL with the CONTRACT ADDRESS, e.g. https://etherscan.io/token/0x
 Source Code (e.g. Github, Gitter)(optional)
 Insert a valid URL.
 
-*** github.com
+*** https://github.com/orgs/registry-labs/repositories
 
 Whitepaper / Technical Documentation(optional)
 Insert a valid URL.
@@ -136,6 +136,8 @@ Insert valid URL(s). If there is more than 1 URL, please separate each entry wit
 
 Twitter
 There is data validation for this field. Kindly ensure that your URL conforms to the following format. https://twitter.com/bitcoin
+
+*** https://twitter.com/the_registry_
 
 Reddit (optional)
 Insert a valid URL for a subreddit.
